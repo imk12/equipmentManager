@@ -15,7 +15,7 @@ public class Equipment {
     @Column(nullable = false)
     private String name;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private EquipmentStatus equipmentStatus = EquipmentStatus.AVAILABLE;
 
     //Getter and Setter

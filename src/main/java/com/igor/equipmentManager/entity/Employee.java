@@ -16,7 +16,7 @@ public class Employee {
     private String email;
 
     @Column(nullable = false)
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Sector sector;
 
     //Getter and Setter
