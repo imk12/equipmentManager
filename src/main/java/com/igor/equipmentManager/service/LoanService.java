@@ -44,8 +44,16 @@ public class LoanService {
         return toResponse(loan);
     }
 
+    public List<LoanResponse> getActivesLoans(){
+        List<LoanResponse> responseList = repository.findAllByReturnDateIsNull().stream()
+                .map(e -> toResponse(e))
+                .toList();
+
+        return responseList;
+    }
+
     @Transactional
-    //Concluí o loan
+    //Conclui o loan
     public void finishLoan(Long id){
         Loan loan = repository.findById(id)
                 .orElseThrow(() -> new LoanNotFoundException("Id",id));

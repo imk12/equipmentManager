@@ -81,7 +81,7 @@ public class EquipmentService {
         Equipment equipment = repository.findById(id)
                 .orElseThrow(() -> new EquipmentNotFoundException("Id", id));
 
-        equipment.setAssetTag(equipmentUpdateName.name());
+        equipment.setName(equipmentUpdateName.name());
     }
 
     @Transactional
