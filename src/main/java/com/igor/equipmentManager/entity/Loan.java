@@ -66,5 +66,6 @@ public class Loan {
     public Loan(Employee employee, Equipment equipment) {
         this.employee = employee;
         this.equipment = equipment;
+        withDrawlDate = LocalDate.now();
     }
 }

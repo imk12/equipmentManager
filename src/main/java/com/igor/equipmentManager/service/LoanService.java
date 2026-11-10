@@ -2,7 +2,11 @@ package com.igor.equipmentManager.service;
 
 import com.igor.equipmentManager.dto.loan.LoanCreation;
 import com.igor.equipmentManager.dto.loan.LoanResponse;
+import com.igor.equipmentManager.entity.Employee;
+import com.igor.equipmentManager.entity.Equipment;
 import com.igor.equipmentManager.entity.Loan;
+import com.igor.equipmentManager.exception.EmployeeNotFoundException;
+import com.igor.equipmentManager.exception.EquipmentNotFoundException;
 import com.igor.equipmentManager.exception.LoanNotFoundException;
 import com.igor.equipmentManager.repository.EmployeeRepository;
 import com.igor.equipmentManager.repository.EquipmentRepository;
@@ -64,7 +68,13 @@ public class LoanService {
     }
 
     public Loan toLoan(LoanCreation loanCreation){
-        return new Loan(loanCreation.employee(),loanCreation.equipment());
+        Employee employee = employeeRepository.findById(loanCreation.employeeId())
+                .orElseThrow(() -> new EmployeeNotFoundException("Id", loanCreation.employeeId()));
+
+        Equipment equipment = equipmentRepository.findById(loanCreation.equipmentId())
+                .orElseThrow(() -> new EquipmentNotFoundException("Id", loanCreation.equipmentId()));
+
+        return new Loan(employee,equipment);
     }
 
     public LoanResponse toResponse(Loan loan){
